@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Main{
+
+    static int scores=0;
+    public static void find(int target){
+        Scanner sc=new Scanner(System.in);
+
+        int attempts=0,maxAttempts=10;
+        while(attempts<maxAttempts){
+
+             System.out.println("Enter your guess between 1 to 100 ");
+            int guess = sc.nextInt();
+            if((guess>100)||(guess<1)){
+                System.out.println("Invalid input");
+                return;}
+        if(target==guess){
+            System.out.println("Congratulations, your guess is correct");
+            scores++;
+            break;
+        }
+        else if(target<guess){
+            System.out.println("Guessed high");
+        }
+        else System.out.println("Guessed low");
+        attempts++;
+        }
+        if(attempts==maxAttempts){
+            System.out.println("Please try again");
+        }
+    }
+    public static void main(String[] args) {
+        String sr;
+        do {
+            Random random = new Random();
+            int max = 100, min = 1;
+            int target = random.nextInt(max - min + 1) + min;
+            Scanner sc = new Scanner(System.in);
+
+            find(target);
+            System.out.println("Do you want to play again? Enter yes or no!");
+            sr=sc.next();
+        }while(sr.equalsIgnoreCase("yes"));
+        System.out.println("Your total score is "+scores);
+    }
+}
