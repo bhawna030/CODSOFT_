@@ -1,0 +1,75 @@
+import javax.swing.*;
+import java.util.ArrayList;
+
+class Contact {
+    private String name;
+    private String phoneNumber;
+    private String email;
+
+    public Contact(String name, String phoneNumber,String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email=email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    public String getemail() {
+        return email;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + phoneNumber+" - " + email;
+    }
+}
+
+public class Main{
+    private ArrayList<Contact> contacts;
+
+    public Main() {
+        contacts = new ArrayList<>();
+    }
+
+    public void addContact(String name, String phoneNumber,String email) {
+        Contact contact = new Contact(name, phoneNumber,email);
+        contacts.add(contact);
+    }
+
+    public String listContacts() {
+        StringBuilder contactList = new StringBuilder();
+        for (Contact contact : contacts) {
+            contactList.append(contact).append("\n");
+        }
+        return contactList.toString();
+    }
+
+    public static void main(String[] args) {
+        Main addressBook = new Main();
+
+        while (true) {
+            String[] options = {"Add Contact", "View Contacts", "Exit"};
+            int choice = JOptionPane.showOptionDialog(null, "Select an option:", "Address Book", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+            switch (choice) {
+                case 0:
+                    String name = JOptionPane.showInputDialog("Enter contact name:");
+                    String phoneNumber = JOptionPane.showInputDialog("Enter phone number:");
+                    String email = JOptionPane.showInputDialog("Enter email:");
+                    addressBook.addContact(name, phoneNumber,email);
+                    break;
+                case 1:
+                    String contactList = addressBook.listContacts();
+                    JOptionPane.showMessageDialog(null, contactList, "Contacts", JOptionPane.PLAIN_MESSAGE);
+                    break;
+                case 2:
+                    System.exit(0);
+            }
+        }
+    }
+}
